@@ -1,5 +1,5 @@
 *{
-  margin: 0;
+  margin-bottom: 30px;
   padding: 0;
   box-sizing: border-box;
 }
@@ -80,6 +80,23 @@ body{
   background-color: rgb(52,216,65);
   color: white;
 }
+#button{
+  padding: 10px;
+  border: none;
+  background-color: purple;
+  background-color: rgb(9, 88, 130);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 2px 1px rgb(127,109,109);
+  font-size: larger;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  transition: 0.2s;
+  width: 100px;
+  position: absolute;
+  text-decoration: none;
+  
+}
 #next-button{
   padding: 10px;
   border: none;
@@ -95,6 +112,7 @@ body{
   width: 100px;
   position: absolute;
   bottom: 15px;
+  text-decoration: none;
 
 }
 #next-button:active{

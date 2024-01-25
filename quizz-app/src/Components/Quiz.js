@@ -1,15 +1,47 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { QuizData } from '../Data/QuizData'
 import { QuizResult } from './QuizResult'
-const Quiz=()=>{
+import { QuizzData } from '../Data/QuizDataa'
+
+const Quiz=({data})=>{
     const[currentQuestion,setCurrentQueston]=useState(0)
     const[score,setScore]=useState(0)
     const[selectOption,setSelectOption]=useState(0)
     const[showResult,setShowResult]=useState(false)
+    const[time,setTime]=useState(600)
+    
+    let QuizDataa
+    
+    if(data==='Java'){
+         QuizDataa=QuizData
+    }else{
+         QuizDataa=QuizzData
+    }
+
+useEffect(()=>{
+    if(time<=0 || showResult){
+        setShowResult(true)
+        return
+    }
+
+ const uniqueId= setInterval(() => {
+        setTime((prevTime)=>prevTime-1)
+ }, 1000);
+
+ return()=>clearInterval(uniqueId);
+},[time])
+
+const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60)
+    .toString()
+    .padStart(2,'0');
+    const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+    };
 
     const changeQuestion=()=>{
         updateScore()
-        if(currentQuestion<QuizData.length-1){
+        if(currentQuestion<QuizDataa.length-1){
             setCurrentQueston(currentQuestion+1)
             setSelectOption(0)
         }else{
@@ -17,28 +49,27 @@ const Quiz=()=>{
         }
     }
     const updateScore=()=>{
-        if(selectOption===QuizData[currentQuestion].answer){
+        if(selectOption===QuizDataa[currentQuestion].answer){
             setScore(score+1)
         }
     }
-    const resetAll=()=>{
-        setCurrentQueston(0)
-        setScore(0)
-        setSelectOption(0)
-        setShowResult(false)
-    }
-    return(
+
+
+        
+
+   return(
         <div>
             <p className='heading-text'>Quiz App</p>
+           {showResult?<p>You Completed {data} test in {formatTime(600-time)} minutes </p> : <p>You have {formatTime(time)} minutes left</p>}
             <div className='container'>
                 { showResult?
-                 (<QuizResult score={score} totalScore={QuizData.length} reset={resetAll}></QuizResult>)
+                 (<QuizResult score={score} totalScore={QuizDataa.length} ></QuizResult>)
                  :
                  (
                  <>
                     <div className='question'>
                         <span id='question-number'>{currentQuestion+1}</span>
-                        <span id='question-txt'>{QuizData[currentQuestion].question}</span>
+                        <span id='question-txt'>{QuizDataa[currentQuestion].question}</span>
                     </div>
                     <div className='opton-container'>
                     {QuizData[currentQuestion].options.map((option,i)=>{
