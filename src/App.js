@@ -10,7 +10,7 @@ function App() {
     <>
      <Router>
       <Routes>
-          <Route element={<Home/>} path='/'/>
+          <Route element={<Home/>} path='/SimpleQuizApp'/>
           <Route element={<Quiz data="Java"/>} path='/Java Test'/>
           <Route element={<Quiz data="Python"/>} path='/python Test'/>
       </Routes>
